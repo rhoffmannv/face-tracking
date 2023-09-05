@@ -8,7 +8,7 @@ El proyecto contiene el *jupyter notebook* **Face Tracking.ipynb** con todos los
 El proyecto se puede dividir a grandes rasgos en:
 
 - Importación de librerías
-- Creación de dataset
+- Creación de *dataset*
   - Captura de imágenes
   - Creación de anotaciones
   - Aumento de datos
@@ -94,18 +94,55 @@ Cada parte se basa en las *feature* entregadas por la red VGG16 y agrega capas s
 ### Definir optimizador y paramétros de entrenamiento
   - Se usa Adam como optimizador.
   - Se definen parámetros como el *learning rate*.
-  - 
+    
 ### Función de loss para regresión
 Se usa la función de pérdida:
 
 $$loss = \sum (x - \hat{x})^2 + (y - \hat{y})^2 + (w - \hat{w})^2 + (h - \hat{h})^2$$
 
-- Donde *x* corresponde a la primera coordenada del punto superior izquierdo del rectángulo.
-- Donde *y* corresponde a la segunda coordenada del punto superior izquierdo del rectángulo.
-- Donde *w* corresponde al ancho del rectángulo.
-- Donde *h* corresponde al alto del rectángulo.
-
-- El "sombrero" hace referencia a la predicción.
+> Donde *x* corresponde a la primera coordenada del punto superior izquierdo del rectángulo.  
+> Donde *y* corresponde a la segunda coordenada del punto superior izquierdo del rectángulo.  
+> Donde *w* corresponde al ancho del rectángulo.  
+> Donde *h* corresponde al alto del rectángulo.  
+> El "sombrero" hace referencia a la predicción.  
 
 ### Función de loss para clasificación
 - Se usa Entropía cruzada para la pérdida de clasificación.
+
+## Entrenamiento del modelo
+
+### Creación de clase Modelo personalizada
+
+Requiere definir los métodos:
+- **compile**: Para declarar las funciones de *loss* y el optimizador a utilizar para entrenar.
+- **train_step**: Para ajustar los pesos del modelo usando gradiente descendiente. Notar que se usa como función de *loss* una suma ponderada del *loss* de regresión y el de clasificación.
+- **test_step**: Para realizar una predicciones sobre el conjunto de *test*. Guarda las *losses* en un diccionario.
+- **call**: Para hacer predicciones con el modelo, se llama con el método *predict*.
+
+### Ajuste de pesos
+- Se define el directorio para el *callback* de Tensorboard (Permite ver los resultados del entrenamiento en tiempo real).
+- Se ejecuta el método *fit* para ajustar los pesos con los datos de entrenamiento.
+- Se ingresa el conjunto de validación para ir calculando el *loss* tanto en entrenamiento como en validación para poder evaluar si existe *overfitting* o *underfittting*.
+
+### Gráficos de losses en entrenamiento y en validación
+- Se hacen 3 gráficos de *losses*: *loss* total, *loss* de clasificación y *loss* de regresión.
+- Por cada uno se grafican tanto el *loss* de entrenamiento como el *loss* de validación.
+
+### Guardar modelo
+- Se guardan los pesos del modelo entrenado para poder cargarlos posteriormente.
+
+## Probar el modelo
+
+###  Predicciones en el conjunto de prueba
+- Se carga un batch de conjunto de prueba y se hace predicción con el modelo obtenido.
+- Se grafican 4 imágenes del batch de prueba y se dibuja encima el rectángulo predicho por el modelo.
+
+## Implementación del modelo
+
+- Se abre videocamera con OpenCV.
+- Se toman los *frame* y se recortan, tomando los primeros *450 x 450* pixeles.
+- Se reescala y normaliza el *frame* para poder ingresarlo al modelo.
+- Se realiza predicción con el modelo.
+- Se dibuja rectangulo con cv2.rectangle y label con cv2.putText.
+- Se muestra el *frame* modificado en pantalla.
+- Salir presionando "q".
