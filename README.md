@@ -3,7 +3,7 @@
 En este proyexto se implementa desde cero una red neuronal profunda para hacer seguimiento de caras.  
 El proyecto contiene el *jupyter notebook* **Face Tracking.ipynb** con todos los pasos a seguir y explicaciones detalladas.
 
-# Detalles del Proyecto
+## Detalles del Proyecto
 
 El proyecto se puede dividir a grandes rasgos en:
 
@@ -59,7 +59,7 @@ Entre las librerías utilizadas destacan:
  
 ## Preprocesamiento de datos
 
-# Separar en conjuntos de entrenamiento, validación y prueba
+### Separar en conjuntos de entrenamiento, validación y prueba
 - Se crean carpetas para imagenes y anotaciones por cada conjunto.
 - Se separan imagenes en conjuntos de entrenamiento, validación y prueba.
 - Se mueven las imágenes a las carpetas correspondientes.
