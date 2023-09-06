@@ -85,6 +85,8 @@ Entre las librerías utilizadas destacan:
 
 ## Creación de modelo
 
+![red_neuronal](https://github.com/rhoffmannv/face-tracking/assets/44439632/0504a795-d011-4295-b924-c472d567a15f)
+
 ### Descarga de VGG16
   - Se descarga la red neuronal convolucional VGG16 ya preentrenada, sin las capas finales.
     
