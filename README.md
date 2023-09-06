@@ -1,8 +1,14 @@
 # Face Tracking
 
 En este proyecto se implementa desde cero una red neuronal profunda para hacer seguimiento de caras.  
-El proyecto contiene el *jupyter notebook* **Face Tracking.ipynb** con todos los pasos a seguir y explicaciones detalladas.
+El proyecto contiene el dos *jupyter notebook*:
+- **Face Tracking.ipynb**: Con todos los pasos a seguir y explicaciones detalladas.
+- **Face Tracking Implementacion.ipynb**: Código para usar el modelo en tiempo real, cargando los pesos ya entrenados.
 
+
+https://github.com/rhoffmannv/face-tracking/assets/44439632/31e711ad-6dfd-47ea-8c7a-2622a9f03bc7
+
+  
 ## Detalles del Proyecto
 
 El proyecto se puede dividir a grandes rasgos en:
